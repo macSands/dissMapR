@@ -15,9 +15,9 @@ get_occurrence_data(
 \arguments{
 \item{data}{Input data. Can be:
 \itemize{
-\item File path to a local CSV file (when \code{source_type = "local_csv"}).
-\item A data frame already loaded in R (when \code{source_type = "data_frame"}).
-\item NULL for GBIF download (when \code{source_type = "gbif"}).
+\item File path to a local CSV file (when source_type = "local_csv").
+\item A data frame already loaded in R (when source_type = "data_frame").
+\item NULL for GBIF download (when source_type = "gbif").
 }}
 
 \item{source_type}{Source type of the data. One of:
@@ -27,7 +27,7 @@ get_occurrence_data(
 \item "gbif": Download and process data from a GBIF ZIP URL.
 }}
 
-\item{gbif_zip_url}{URL of the GBIF ZIP file (required when \code{source_type = "gbif"}).}
+\item{gbif_zip_url}{URL of the GBIF ZIP file (required when source_type = "gbif").}
 
 \item{download_dir}{Directory to save the downloaded GBIF data (default: temporary directory).}
 
@@ -36,8 +36,8 @@ get_occurrence_data(
 \value{
 A processed data frame in long or wide format. Returns:
 \itemize{
-\item "long format" if \code{sp_name} and either \code{pa} or \code{abundance} columns are detected.
-\item "wide format" if species columns (\verb{sp_*}) are present.
+\item "long format" if sp_name and either pa or abundance columns are detected.
+\item "wide format" if species columns (sp_*) are present.
 }
 }
 \description{
