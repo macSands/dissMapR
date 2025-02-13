@@ -17,3 +17,5 @@ Imports:
     dplyr,
     httr,
     tidyr
+URL: https://github.com/macSands/dissMapR
+BugReports: https://github.com/macSands/dissMapR/issues
