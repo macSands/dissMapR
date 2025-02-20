@@ -1,58 +1,29 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 
 # dissMapR: A Novel Framework for Automated Compositional Dissimilarity and Biodiversity Turnover Analysis
 
 <!-- badges: start -->
-
-[![Lifecycle:
-stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![test-coverage](https://github.com/macSands/dissMapR/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/macSands/dissMapR/actions/workflows/test-coverage.yaml)
-[![Codecov test
-coverage](https://codecov.io/gh/macSands/dissMapR/graph/badge.svg)](https://app.codecov.io/gh/macSands/dissMapR)
+[![Codecov test coverage](https://codecov.io/gh/macSands/dissMapR/graph/badge.svg)](https://app.codecov.io/gh/macSands/dissMapR)
 <!-- badges: end -->
 
-`dissMapR` is an R package designed to streamline the assessment,
-mapping, and prediction of compositional dissimilarity and biodiversity
-turnover. It integrates multi-site dissimilarity metrics - particularly
-zeta diversity - and advanced modelling approaches, such as Multi-Site
-Generalized Dissimilarity Modelling (MS-GDM), to evaluate how
-biodiversity patterns respond to environmental drivers at multiple
-spatial scales.
+`dissMapR` is an R package designed to streamline the assessment, mapping, and prediction of compositional dissimilarity and biodiversity turnover. It integrates multi-site dissimilarity metrics - particularly zeta diversity - and advanced modelling approaches, such as Multi-Site Generalized Dissimilarity Modelling (MS-GDM), to evaluate how biodiversity patterns respond to environmental drivers at multiple spatial scales.
 
-This project is part of the [B3 (B-Cubed) project](https://b-cubed.eu/),
-a Europe-wide collaboration dedicated to advancing robust biodiversity
-indicators for more effective policy and decision-making. In addition to
-this repository, `dissMapR` will be hosted on the [B-Cubed GitHub
-organization](https://github.com/b-cubed-eu).
-
-## Installation
-
-You can install the development version of dissMapR from
-[GitHub](https://github.com/) with:
-
-``` r
-# install.packages("pak")
-pak::pak("macSands/dissMapR")
-```
-
-## Example
-
-# dissMapR: A Novel Framework for Automated Compositional Dissimilarity and Biodiversity Turnover Analysis
-
-`dissMapR` is an R package designed to streamline the assessment,
-mapping, and prediction of compositional dissimilarity and biodiversity
-turnover. It integrates multi-site dissimilarity metrics - particularly
-zeta diversity - and advanced modelling approaches, such as Multi-Site
-Generalized Dissimilarity Modelling (MS-GDM), to evaluate how
-biodiversity patterns respond to environmental drivers at multiple
-spatial scales.
-
-This project is part of the [B3 (B-Cubed) project](https://b-cubed.eu/),
-a Europe-wide collaboration dedicated to advancing robust biodiversity
-indicators for more effective policy and decision-making. In addition to
-this repository, `dissMapR` will be hosted on the [B-Cubed GitHub
-organization](https://github.com/b-cubed-eu).
+This project is part of the [B3 (B-Cubed) project](https://b-cubed.eu/), a Europe-wide collaboration dedicated to advancing robust biodiversity indicators for more effective policy and decision-making. In addition to this repository, `dissMapR` will be hosted on the [B-Cubed GitHub organization](https://github.com/b-cubed-eu).
 
 ## Features
 
@@ -130,5 +101,4 @@ occurrence data in southern Africa:
 # devtools::install_github("b-cubed-eu/dissMapR")
 ```
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
