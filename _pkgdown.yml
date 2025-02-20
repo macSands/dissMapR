@@ -11,8 +11,10 @@ navbar:
   bg: primary
   type: dark
   structure:
-    left: [intro, reference, news, articles]
-    right: [search, mainsite, github]
+    right:
+    - search
+    - mainsite
+    - github
   components:
     mainsite:
       icon: fa-cube
