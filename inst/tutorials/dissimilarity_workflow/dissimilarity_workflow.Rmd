@@ -1,0 +1,276 @@
+---
+title: "Dissimilarity Workflow"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Introduction
+
+This tutorial demonstrates a typical **dissMapR** workflow for compositional dissimilarity analysis, covering:   
+
+1. Setting up an area of interest and grid resolution  
+2. Building site-by-species data with sampling effort  
+3. Creating a site-by-environment matrix  
+4. Calculating zeta decline and zeta decay  
+5. Fitting MS-GDM for multiple orders  
+6. Predicting zeta for the present scenario and mapping dissimilarity/bioregions  
+7. Predicting zeta for future scenarios  
+8. Publishing outputs and metadata (e.g., to Zenodo)
+
+---
+
+## 1. User-Defined Area of Interest and Grid Resolution
+
+### Description
+- Load or define a shapefile (e.g., `rsa.shp`) to specify your region of interest.  
+- Choose a grid size (e.g., 0.5°).  
+- Generate a data frame `xy` of site centroids and visualize the grid.
+
+### Exercise
+
+Create a 0.5° grid for the specified shapefile region and assign each centroid to a site ID. For practice, we’ll assume you have a shapefile or bounding box in a variable called `aoi`:
+
+```{r grid-setup, exercise=TRUE}
+# library(dissMapR) # if needed
+# 1. Load / define AOI (pseudo example)
+# aoi <- st_read("path/to/rsa.shp")
+
+# 2. Create a grid with 0.5° resolution
+# grid_list <- generate_grid(
+#   data = aoi,
+#   grid_size = 0.5
+# )
+
+# 3. Extract site centroids into xy data frame
+# xy <- grid_list$grid_sp[, c("grid_id", "x", "y")]
+#
+# 4. Plot to confirm
+# ggplot() +
+#   geom_sf(data = grid_list$grid_sf, fill = NA, color = "darkgrey") +
+#   theme_minimal()
+```
+
+---
+
+## 2. Site-by-Species Matrix & Sampling Effort
+
+### Description
+- Retrieve occurrence data for a target taxon (e.g., from GBIF).
+- Bin these occurrences into your grid cells.
+- Create a raster of occurrence counts (“sampling effort”), then a binary site-by-species matrix `sbs`.
+- Generate a single-variable data frame `sam.eff` representing sampling effort.
+
+### Exercise with Code
+
+We’ll simulate retrieving occurrence data and converting it to a binary matrix. Edit the code below to:   
+
+1. Define your taxon of interest,  
+2. Convert records to presence–absence,  
+3. Summarize sampling effort, and  
+4. Produce a `sam.eff` data frame.
+
+```{r sbs-creation, exercise=TRUE, exercise.lines=7}
+# Sample code outline:
+
+# taxon <- "Papilionidae"  # Example
+# occurrences <- get_occurrence_data(
+#    data = taxon,
+#    source_type = "gbif"
+# )
+#
+# grid_occ <- assign_to_grid(occurrences, grid_list$grid_sp)
+#
+# sbs <- create_sbs(grid_occ, binarize = TRUE)
+# sam.eff <- data.frame(
+#   site_id = sbs$site_id,
+#   sampling_effort = rowSums(sbs[, -1]) # or occurrence counts
+# )
+#
+# # Now produce a raster of sampling effort or a summary plot...
+```
+
+---
+
+## 3. Site-by-Environment Matrix
+
+### Description
+- For each site centroid in `xy`, extract environmental variables (temperature, precipitation, etc.).
+- Merge these into a matrix/data frame `sbe`.
+- Append `sam.eff` to both the raster stack and `sbe`.
+
+### Exercise
+
+Use `get_enviro_data()` or a similar approach to gather environment layers. Then join them to `xy`:
+
+```{r sbe-env, exercise=TRUE, exercise.lines=5}
+# enviro_list <- get_enviro_data(
+#   data = xy, 
+#   buffer_km = 1,
+#   source = "geodata", # e.g., 'geodata' or 'local'
+#   var = "bio",
+#   res = 2.5
+# )
+#
+# sbe <- enviro_list$env_df
+# sbe$sampling_effort <- sam.eff$sampling_effort[match(sbe$grid_id, sam.eff$site_id)]
+```
+
+---
+
+## 4. Zeta Decline and Zeta Decay
+
+### Description
+- **Zeta Decline**: Evaluate how multi-site similarity changes with increasing order (e.g., 2 to 15).
+- **Zeta Decay**: Combine `sbs` and `xy` to see how dissimilarity changes with distance.
+
+### Exercise
+
+1. Compute zeta for orders 2 to 15 with your site-by-species data (`sbs`).  
+2. Plot the decline or decay.  
+
+```{r zeta-decline-decay, exercise=TRUE, exercise.lines=5}
+# zeta_res <- compute_orderwise(
+#   df = sbs,
+#   func = zeta_diversity,
+#   order = 2:15
+# )
+# 
+# plot(zeta_res$order, zeta_res$value, type="b", main="Zeta Decline")
+```
+
+---
+
+## 5. MS-GDM with `Zeta.msgdm(sbs, sbe, xy)`
+
+### Description
+- Fit Multi-Site Generalized Dissimilarity Models for selected orders (2, 3, 5, 10).
+- Generate model summaries (no direct mapping yet).
+- Save the fitted order-2 model as `zeta2`.
+
+### Exercise
+
+```{r msgdm-fitting, exercise=TRUE, exercise.eval=TRUE}
+# zeta2 <- zetadiv::Zeta.msgdm(
+#   sbs_pa   = sbs,     # presence-absence
+#   sbe      = sbe,     # environment + sampling_effort
+#   sbs_xy   = xy,      # site centroids
+#   order    = 2,       # main order
+#   reg.type = "ispline"
+# )
+# summary(zeta2$model)
+```
+
+---
+
+## 6. Predict with `zeta2` (Present Scenario)
+
+### Description
+1. Replace `sam.eff` in `sbe` with a constant `sam.max` to simulate full sampling.  
+2. Predict a site-by-site dissimilarity matrix `zeta.now`.  
+3. Use NMDS + RGB plots to map dissimilarity and cluster analyses for bioregions.
+
+### Exercise with Hint
+
+```{r predict-present, exercise=TRUE, exercise.eval=TRUE}
+# sbe$max_sampling <- max(sbe$sampling_effort)
+# # Overwrite sampling_effort with max_sampling
+# sbe$sampling_effort <- sbe$max_sampling
+#
+# zeta.now <- predict(
+#   zeta2$model,
+#   newdata = sbe
+# )
+# 
+# # Perform NMDS or clustering on zeta.now
+# # ...
+```
+
+```{r present-hint}
+# Example hint: 
+# NMDS or MDS might be done with vegan::metaMDS or stats::cmdscale
+# cluster with hclust or kmeans, then map results.
+```
+
+---
+
+## 7. Predict with `zeta2` (Future Scenarios)
+
+### Description
+1. Append or replace environment columns in `sbe` for each scenario (`m` total scenarios + present).  
+2. Predict dissimilarities for the combined dataset.  
+3. Evaluate future shifts using NMDS/clustering on the `zeta.future` matrix.
+
+### Exercise
+
+```{r predict-future, exercise=TRUE, exercise.lines=6}
+# # sbe_future might contain extra rows or columns for future scenarios
+# 
+# zeta.future <- predict(
+#   zeta2$model,
+#   newdata = sbe_future
+# )
+#
+# # Then do NMDS/ clustering, map changes over time
+```
+
+---
+
+## 8. Deposit Outputs to Zenodo
+
+### Description
+- Collect final data frames, maps, and model outputs.  
+- Package them with **metadata** and version info.  
+- Publish on Zenodo to ensure reproducibility and referencing.
+
+### Exercise
+
+No specific coding required, but you could demonstrate packaging logs, CSVs, or R objects for Zenodo:
+
+```{r zenodo-deposit, exercise=TRUE}
+# library(zen4R) # example package (if you want to do it programmatically)
+# draft_zenodo <- ZenodoManager$new(token = "YOUR_ZENODO_TOKEN")
+# # draft_zenodo$deposit(...)
+```
+
+---
+
+## Quiz
+
+Here are a couple of quick checks to ensure you understand the overall workflow:
+
+```{r quiz}
+quiz(
+  question("Which step primarily focuses on building a site-by-environment matrix?",
+    answer("Step 1: Grid resolution"),
+    answer("Step 2: Site-by-species matrix"),
+    answer("Step 3: Site-by-environment matrix", correct = TRUE),
+    answer("Step 6: Predict dissimilarity")
+  ),
+  question("In step 7, what is the main difference from step 6?",
+    answer("It includes scenario-based environmental data for predictions", correct = TRUE),
+    answer("It changes the grid size to 1.0°"),
+    answer("It no longer uses the MS-GDM model"),
+    answer("Sampling effort is removed completely")
+  )
+)
+```
+
+---
+
+# Conclusion
+
+By following the **eight-step** workflow, you can:   
+
+1. Define your area of interest,  
+2. Build site-by-species and environment matrices,  
+3. Model dissimilarities under current or future conditions,  
+4. Generate NMDS-based maps and cluster-derived bioregions,  
+5. Archive all outputs for reproducibility.
+
+Explore each code chunk, expand with your own data, and adapt to larger regions or more complex environmental scenarios. Good luck!
+```

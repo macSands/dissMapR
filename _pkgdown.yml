@@ -1,0 +1,23 @@
+url: https://macsands.github.io/dissMapR/
+template:
+  bootstrap: 5
+  bslib:
+    bg: '#ffffff'
+    fg: '#2f2f2f'
+    heading_font:
+      google: PT Sans
+    primary: '#005856'
+navbar:
+  bg: primary
+  type: dark
+  structure:
+    right:
+    - search
+    - mainsite
+    - github
+  components:
+    mainsite:
+      icon: fa-cube
+      href: https://www0.sun.ac.za/biomath/about-biomath/
+      aria-label: BioMath website
+
