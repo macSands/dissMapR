@@ -66,7 +66,7 @@ dim(xy)
 ```
 
 #### Visualise AOI Grid on Map
-```{r map}
+```{r map_aoi}
 # Quick visualization: AOI + centroid points
 ggplot() +
   geom_sf(data = aoi, fill = "lightgray", color = "black") +
@@ -163,7 +163,7 @@ sam.eff[effort_df$cell_id] <- effort_df$n_occurrences
 ```
 
 #### Optional Richness and Sampling Effort Maps
-```{r map}
+```{r map_rich}
 # Species richness map (row sums of sbs)
 richness <- rowSums(sbs)
 richness_rast <- r_id
@@ -226,23 +226,22 @@ env_stack_all
 We'll assume dissMapR or zetadiv provides functions for multi-site zeta.
 ```{r zdecline}
 # For example, using the 'zetadiv' package:
-library(zetadiv)
-
-# sbs must be a site-by-species matrix (rows=sites, columns=species)
-zeta_orders <- 1:5
-
-# Run `Zeta.decline.ex`
-head(sbs)
-zeta.decline <- Zeta.decline.ex(sbs[,-3],
-                                orders = zeta_orders,
-                                plot = FALSE)
-
-# Plot zeta decline
-plot(zeta_orders,
-     zeta.decline$zeta.val,
-     type = "b",
-     xlab = "Order", ylab = "Mean Zeta Diversity",
-     main = "Zeta Decline")
+# library(zetadiv)
+# 
+# # sbs must be a site-by-species matrix (rows=sites, columns=species)
+# zeta_orders <- 1:5
+# 
+# # Run `Zeta.decline.ex`
+# zeta.decline <- Zeta.decline.ex(sbs[,-3],
+#                                 orders = zeta_orders,
+#                                 plot = FALSE)
+# 
+# # Plot zeta decline
+# plot(zeta_orders,
+#      zeta.decline$zeta.val,
+#      type = "b",
+#      xlab = "Order", ylab = "Mean Zeta Diversity",
+#      main = "Zeta Decline")
 ```
 
 #### Zeta Decay
@@ -293,7 +292,7 @@ dim(sites_xy)
 #### Fit MultiSite GDM
 We now assume dissMapR has a function Zeta.msgdm() for multi-site GDM (this is hypothetical; adapt based on actual package usage)
 
-```{r zdecay}
+```{r msgdm}
 # Fit MS-GDM for orders = 2, 3, 5, 10
 orders_to_fit <- c(2, 3, 5, 10)
 dim(sbs[,-3])
