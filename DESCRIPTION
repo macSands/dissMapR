@@ -24,3 +24,6 @@ Imports:
 URL: https://github.com/macSands/dissMapR, https://macsands.github.io/dissMapR/
 BugReports: https://github.com/macSands/dissMapR/issues
 VignetteBuilder: knitr
+Depends: 
+    R (>= 3.5)
+LazyData: true
