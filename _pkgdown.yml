@@ -1,4 +1,9 @@
 url: https://macsands.github.io/dissMapR/
+
+# Make README.Rmd the homepage
+home:
+  rmd: README.Rmd
+
 template:
   bootstrap: 5
   bslib:
@@ -7,17 +12,31 @@ template:
     heading_font:
       google: PT Sans
     primary: '#005856'
+
 navbar:
+  # Title appears in the top-left corner
+  title: "dissMapR"
   bg: primary
   type: dark
-  structure:
-    right:
+
+  # Define left vs. right items
+  left:
+    - text: "Tutorials"
+      # Point to your main vignette. (Adjust file name as needed.)
+      href: articles/dissMapR.html
+    - text: "Reference"
+      href: reference/index.html
+    - text: "News"
+      href: news/index.html
+    - text: "Contributing"
+      href: contributing.html
+
+  # Keep search, plus your existing link(s) on the right
+  right:
     - search
-    - mainsite
-    - github
-  components:
-    mainsite:
+    - text: "BioMath"
       icon: fa-cube
       href: https://www0.sun.ac.za/biomath/about-biomath/
-      aria-label: BioMath website
-
+    - text: "GitHub"
+      icon: fa-github
+      href: https://github.com/macSands/dissMapR
