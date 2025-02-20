@@ -1,3 +1,5 @@
+# Use the same color scheme or tweak as needed
+title: "dissMapR"
 url: https://macsands.github.io/dissMapR/
 
 # Make README.Rmd the homepage
@@ -7,11 +9,13 @@ home:
 template:
   bootstrap: 5
   bslib:
-    bg: '#ffffff'
-    fg: '#2f2f2f'
+    bg: "#FFFFFF"
+    fg: "#333333"
+    primary: "#00AFBB"      # This matches the teal from b3gbi
+    base_font:
+      google: "Lato"
     heading_font:
-      google: PT Sans
-    primary: '#005856'
+      google: "Lato"
 
 navbar:
   # Title appears in the top-left corner
@@ -19,24 +23,18 @@ navbar:
   bg: primary
   type: dark
 
-  # Define left vs. right items
+structure:
+    right:
+    - search
+    - icon: fa-github
+      href: https://github.com/macSands/dissMapR
+
   left:
-    - text: "Tutorials"
-      # Point to your main vignette. (Adjust file name as needed.)
-      href: articles/dissMapR.html
+    - text: "Tutorial"
+      href: articles/dissMapR_tutorial.html
     - text: "Reference"
       href: reference/index.html
     - text: "News"
       href: news/index.html
     - text: "Contributing"
       href: contributing.html
-
-  # Keep search, plus your existing link(s) on the right
-  right:
-    - search
-    - text: "BioMath"
-      icon: fa-cube
-      href: https://www0.sun.ac.za/biomath/about-biomath/
-    - text: "GitHub"
-      icon: fa-github
-      href: https://github.com/macSands/dissMapR

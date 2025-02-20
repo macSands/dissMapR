@@ -1,0 +1,35 @@
+---
+title: "Tutorial"
+author: "Sandra MacFadyen"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{Tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+...some text...
+
+## Package Installation
+
+...some text...
+
+## Core Functions
+
+...some text...
+
+```{r setup}
+library(dissMapR)
+```
