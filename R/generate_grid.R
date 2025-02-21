@@ -25,6 +25,7 @@
 #' @export
 #'
 #' @examples
+#' # Simulated Example for generate_grid
 #' set.seed(123)
 #' data <- data.frame(
 #'   x = runif(100, -10, 10),
@@ -33,11 +34,28 @@
 #'   species2 = rpois(100, 3),
 #'   recordedBy = sample(LETTERS, 100, replace = TRUE)
 #' )
-#' grid_result <- generate_grid(data, x_col = "x", y_col = "y",
-#'                              grid_size = 1, sum_col_range = 3:4,
-#'                              extra_cols = c("recordedBy"))
+#'
+#' # Generate grid with grid cells of size 1 degree,
+#' # summarizing species counts (columns 3 and 4)
+#' # and retaining the 'recordedBy' metadata.
+#' grid_result <- generate_grid(
+#'   data,
+#'   x_col = "x",
+#'   y_col = "y",
+#'   grid_size = 1,
+#'   sum_col_range = 3:4,
+#'   extra_cols = "recordedBy",
+#'   unit = "deg"
+#' )
+#'
+#' # Inspect the summarized block spatial data
 #' print(grid_result$block_sp)
-#' plot(grid_result$grid_sf["grid_id"])
+#'
+#' # Plot the grid polygons with grid IDs
+#' plot(grid_result$grid_sf["grid_id"], main = "Grid Polygons with IDs")
+#'
+#' # Optionally, plot the terra raster grid
+#' terra::plot(grid_result$grid, main = "Terra Raster Grid")
 generate_grid <- function(data,
                           x_col = "x",       # Column name for x-coordinates
                           y_col = "y",       # Column name for y-coordinates
@@ -137,7 +155,7 @@ generate_grid <- function(data,
   block_sp <- dplyr::left_join(block_sp, grid_info, by = "grid_id") %>%
     dplyr::select(grid_id, centroid_lon, centroid_lat, dplyr::any_of("mapsheet"), dplyr::everything())
 
-  row.names(block_sp) <- block_sp$grid_id
+  # row.names(block_sp) <- block_sp$grid_id
 
   return(list(grid = grid_rast,
               grid_sf = grid_sf,

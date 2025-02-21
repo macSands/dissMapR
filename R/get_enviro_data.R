@@ -33,7 +33,7 @@
 #' # Example usage:
 #' data = data.frame(site_id = 1:5, x = c(10, 12, 14, 16, 18), y = c(20, 22, 24, 26, 28))
 #' env_data = get_enviro_data(data, buffer_km = 5, var = "bio", res = 2.5, path = "data/")
-#' plot(env_data$env_rast[[1]])
+#' terra::plot(env_data$env_rast[[1]])
 #' points(env_data$sites_sf)
 
 get_enviro_data = function(data,

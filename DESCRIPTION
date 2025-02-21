@@ -1,6 +1,6 @@
 Package: dissMapR
 Title: R package to analyse compositional dissimilarity and biodiversity turnover
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person("Sandra", "MacFadyen", , "sandra@biogis.co.za", role = c("aut", "cre"),
     comment = c(ORCID = '0000-0002-5316-440X'))
@@ -20,7 +20,12 @@ Imports:
     devtools,
     dplyr,
     httr,
-    tidyr
+    tidyr,
+    geodata,
+    sf,
+    terra,
+    zoo,
+    ggplot2
 URL: https://github.com/macSands/dissMapR, https://macsands.github.io/dissMapR/
 BugReports: https://github.com/macSands/dissMapR/issues
 VignetteBuilder: knitr

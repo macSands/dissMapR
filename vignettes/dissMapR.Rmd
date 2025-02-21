@@ -40,6 +40,7 @@ library(tidyr)
 # Adjust the path and layer name as needed
 # aoi <- st_read("D:/Methods/R/myR_Packages/all_B3_packages/dissMapR/data/rsa.shp")
 aoi <- st_read(system.file("data", "rsa.shp", package = "dissMapR"))
+# aoi <- st_read(system.file("extdata", "rsa.shp", package = "dissMapR"))
 ```
 
 #### Generate Grid and Centroids Data Frame

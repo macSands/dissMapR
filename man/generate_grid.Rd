@@ -47,6 +47,7 @@ Finally, it summarizes specified columns within each grid cell while preserving 
 provided via \code{extra_cols}.
 }
 \examples{
+# Simulated Example for generate_grid
 set.seed(123)
 data <- data.frame(
   x = runif(100, -10, 10),
@@ -55,9 +56,26 @@ data <- data.frame(
   species2 = rpois(100, 3),
   recordedBy = sample(LETTERS, 100, replace = TRUE)
 )
-grid_result <- generate_grid(data, x_col = "x", y_col = "y",
-                             grid_size = 1, sum_col_range = 3:4,
-                             extra_cols = c("recordedBy"))
+
+# Generate grid with grid cells of size 1 degree,
+# summarizing species counts (columns 3 and 4)
+# and retaining the 'recordedBy' metadata.
+grid_result <- generate_grid(
+  data,
+  x_col = "x",
+  y_col = "y",
+  grid_size = 1,
+  sum_col_range = 3:4,
+  extra_cols = "recordedBy",
+  unit = "deg"
+)
+
+# Inspect the summarized block spatial data
 print(grid_result$block_sp)
-plot(grid_result$grid_sf["grid_id"])
+
+# Plot the grid polygons with grid IDs
+plot(grid_result$grid_sf["grid_id"], main = "Grid Polygons with IDs")
+
+# Optionally, plot the terra raster grid
+terra::plot(grid_result$grid, main = "Terra Raster Grid")
 }

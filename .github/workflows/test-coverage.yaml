@@ -27,8 +27,7 @@ jobs:
           extra-packages: any::covr, any::xml2, any::devtools
 
       - name: Install devtools
-        run: |
-          install.packages('devtools')
+        run: Rscript -e "install.packages('devtools')"
 
       - name: Test coverage
         run: |
