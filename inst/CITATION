@@ -1,11 +1,14 @@
+citHeader("To cite `dissMapR` in publications please use:")
+# begin checklist entry
 bibentry(
-  bibtype  = "Article",
-  title    = ,
-  author   = ,
-  journal  = ,
-  year     = ,
-  volume   = ,
-  number   = ,
-  pages    = ,
-  doi      =
+  bibtype = "Manual",
+  title = "dissMapR: Analysing compositional dissimilarity and biodiversity turnover. Version 0.0.1",
+  author = c( author = c(person(given = "Sandra", family = "MacFadyen"))),
+  year = 2025,
+  url = "https://macsands.github.io/dissMapR/",
+  abstract = "dissMapR is an R package designed to streamline the assessment, mapping, and prediction of compositional dissimilarity and biodiversity turnover. It integrates multi-site dissimilarity metrics - particularly zeta diversity - and advanced modelling approaches, such as Multi-Site Generalized Dissimilarity Modelling (MS-GDM), to evaluate how biodiversity patterns respond to environmental drivers at multiple spatial scales.",
+  textVersion = "MacFadyen, Sandra (2025) dissMapR: Analysing compositional dissimilarity and biodiversity turnover. Version 0.0.1. https://macsands.github.io/dissMapR/",
+  keywords = "dissimilarity; turnover; B-Cubed; biodiversity; zeta diversity",
+  doi = "xxxx",
 )
+# end checklist entry

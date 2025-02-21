@@ -1,40 +1,21 @@
-# Use the same color scheme or tweak as needed
-title: "dissMapR"
 url: https://macsands.github.io/dissMapR/
-
-# Make README.Rmd the homepage
-home:
-  rmd: README.Rmd
 
 template:
   bootstrap: 5
   bslib:
-    bg: "#FFFFFF"
-    fg: "#333333"
-    primary: "#00AFBB"      # This matches the teal from b3gbi
-    base_font:
-      google: "Lato"
-    heading_font:
-      google: "Lato"
+    bg: "#ffffff"
+    fg: "#2f2f2f"
+    heading_font: {google: "PT Sans"}
+    primary: "#005856"
 
 navbar:
-  # Title appears in the top-left corner
-  title: "dissMapR"
   bg: primary
   type: dark
-
-structure:
-    right:
-    - search
-    - icon: fa-github
-      href: https://github.com/macSands/dissMapR
-
-  left:
-    - text: "Tutorial"
-      href: articles/dissMapR_tutorial.html
-    - text: "Reference"
-      href: reference/index.html
-    - text: "News"
-      href: news/index.html
-    - text: "Contributing"
-      href: contributing.html
+  structure:
+    left: [intro, reference, news, articles]
+    right: [search, mainsite, github]
+  components:
+    mainsite:
+      icon: fa-cube
+      href: https://b-cubed.eu/
+      aria-label: B-Cubed website

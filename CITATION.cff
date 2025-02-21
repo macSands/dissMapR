@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it using these metadata.
+title: "dissMapR: Analysing compositional dissimilarity and biodiversity turnover"
+authors:
+- given-names: Sandra
+  family-names: MacFadyen
+  affiliation: Stellenbosch University (SUN)
+  orcid: 0000-0002-5316-440X
+keywords:
+- dissimilarity
+- turnover
+- B-Cubed
+- biodiversity
+- zeta diversity
+contact:
+- given-names: Sandra
+  family-names: MacFadyen
+  affiliation: Stellenbosch University (SUN)
+  orcid: 0000-0002-5316-440X
+doi: xxxxxxx
+license: MIT
+repository-code: https://github.com/macSands/dissMapR
+type: software
+abstract: "dissMapR is an R package designed to streamline the assessment, mapping, and prediction of compositional dissimilarity and biodiversity turnover. It integrates multi-site dissimilarity metrics - particularly zeta diversity - and advanced modelling approaches, such as Multi-Site Generalized Dissimilarity Modelling (MS-GDM), to evaluate how biodiversity patterns respond to environmental drivers at multiple spatial scales."
+identifiers:
+- type: doi
+  value: xxxxxxx
+- type: url
+  value: https://macsands.github.io/dissMapR/
+version: 0.0.1
